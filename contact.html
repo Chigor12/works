@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form</title>
+    <style>
+        *{
+            margin:0; padding:0; box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{ background:#f5f7fa; color:#333; line-height:1.6; }
+        header{
+            background:linear-gradient(135deg,#6a11cb,#2575fc);
+            color:white; padding:1rem 0;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+        .container{ width:90%; max-width:800px; margin:auto; }
+        .navbar{ display:flex; justify-content:space-between; align-items:center; }
+        .nav-links{ list-style:none; display:flex; }
+        .nav-links li{ margin-left:2rem; }
+        .nav-links a{
+            color:white; text-decoration:none; padding:0.5rem 1rem;
+            border-radius:4px; transition:0.3s;
+        }
+        .nav-links a:hover{ background:rgba(255,255,255,0.1); }
+
+        main{ padding:3rem 0; }
+        form{ background:white; padding:2rem; border-radius:8px;
+              box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+        .form-group{ margin-bottom:1.5rem; }
+        label{ display:block; margin-bottom:0.5rem; }
+        input,select,textarea{
+            width:100%; padding:0.7rem; border:1px solid #ddd;
+            border-radius:4px; font-size:1rem;
+        }
+        button{
+            background:linear-gradient(135deg,#6a11cb,#2575fc);
+            color:white; border:none; padding:0.75rem 1.5rem;
+            border-radius:4px; cursor:pointer;
+        }
+        .success-message{
+            background:#d4edda; color:#155724;
+            padding:1rem; border-radius:4px;
+            margin-top:1rem; display:none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="index.html" class="logo">MyApp</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html" class="active">Contact Form</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h1>Contact Form</h1>
+    <form id="contactForm">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Subject</label>
+            <select name="subject" required>
+                <option value="">Select</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Feedback">Feedback</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="successMessage" class="success-message">
+        Form submitted successfully! File saved.
+    </div>
+</main>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+
+    formData.forEach((value, key) => data[key] = value);
+
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "form-data.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    document.getElementById("successMessage").style.display = "block";
+    this.reset();
+});
+</script>
+
+</body>
+</html>
