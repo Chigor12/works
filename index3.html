@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nav form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *h1{ font-style: oblique; font-display: block; margin-bottom: 12px;  }
+        p{font-family: sans-serif; font-size: medium; color: brown; margin-bottom: 12px;}
+        nav{ background-color: aqua; font-size: 30px; justify-content: center; background-size: contain;}
+        nav ul{display:flex; justify-content: left; list-style-type: none; flex-direction: row; justify-content: space-between;}
+        .flex{ display:flex; justify-content: space-between; align-items: center; border: 3px solid green; padding:20px;}
+        .image{ border-radius: 50%; justify-content: left; }
+        .bn{background-color: burlywood; padding: 10px 20px; font-size: 20px; border-radius: 5px;cursor: pointer;}
+    </style>
+</head>
+<body>
+    <h1>MY WEBSITE!</h1>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#mail">E-mail</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <h1>Welcome to my website.</h1>
+        <p>This is a simple example of a responsive navigation bar.</p>
+    </main>
+    <section class="flex">
+    <div>
+        <h1>Display of cars.</h1>
+        <p>Do you want to see pictures of cars?
+            If yes, then sign in.
+        </p>
+        <button class="bn">Sign in</button>
+    </div>  
+    <div>
+    <img class="image" src="car.jpg" alt="CAR" width="300" height="200">
+    </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Form</title>
+        <meta charset="UTF-8">
+        <style>
+            h1{ font-display: block; margin-bottom: 12px; font-family: sans-serif; }
+            h2{  font-display: block; margin-bottom: 12px; font-family: sans-serif; }
+            p{ font-size: medium; font-family:sans-serif; color:black; margin-bottom: 12px;}
+            fieldset{ border: 1px solid #ccc; padding: 10px; margin-bottom: 12px; }
+            button{ background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+            body{ background-color:cadetblue; margin: 20px;}
+            form{ background-color: #f2f2f2; padding: 25px; border-radius: 5px; }
+        </style>
+    </head>
+    <body>
+        <h1>This is a form!</h1>
+        <h2>Your details would be registered using this form.</h2>
+        <fieldset>
+            <legend><b>Contact form:</b></legend>
+        <form action="#" method="post">
+            
+            <p>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Ituma Chigor" required><br>
+            </p>
+            <p>
+            <label for="email">Email:</label> 
+            <input type="email" id="email" name="email" placeholder="chigor@gmail.com" required> <br>
+            </p>
+            <p>
+            <label for="phone">Phone Number:</label>
+            <input type="number" id="phone" name="phone" placeholder="0812345678" min="10"  required><br>
+            </p>
+             <p>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Type your message"></textarea><br>
+        </p>
+            <button type="submit">Send</button>
+
+        </form>
+        </fieldset>
+    </body>
+</html>
