@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+
+<style>
+:root {
+  --bg: #101820;
+  --panel: #1f2937;
+  --button: #2d3748;
+  --button-accent: #4f46e5;
+  --button-equal: #10b981;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #334155 0%, #020617 60%);
+  color: var(--text);
+}
+
+.calculator {
+  width: min(420px, calc(100vw - 32px));
+  background: linear-gradient(180deg, #191e29 0%, #111827 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 20px 50px var(--shadow);
+}
+
+.display {
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 18px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.display__result {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-align: right;
+  min-height: 1.2em;
+}
+
+.display__current {
+  font-size: 2.5rem;
+  text-align: right;
+  word-break: break-all;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 16px;
+  padding: 20px 0;
+  font-size: 1.15rem;
+  color: var(--text);
+  background: var(--button);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+.operator {
+  background: rgba(79, 70, 229, 0.95);
+}
+
+.equal {
+  background: var(--button-equal);
+  color: white;
+}
+
+.clear {
+  background: rgba(248, 113, 113, 0.95);
+}
+
+button:focus {
+  outline: 2px solid rgba(255,255,255,.18);
+  outline-offset: 2px;
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+<div class="calculator">
+
+  <div class="display">
+    <div class="display__result" id="result"></div>
+    <div class="display__current" id="display">0</div>
+  </div>
+
+  <div class="buttons">
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button class="operator" onclick="deleteLast()">DEL</button>
+    <button class="operator" onclick="appendValue('%')">%</button>
+    <button class="operator" onclick="appendValue('/')">÷</button>
+
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button class="operator" onclick="appendValue('*')">×</button>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button class="operator" onclick="appendValue('-')">−</button>
+
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button class="operator" onclick="appendValue('+')">+</button>
+
+    <button class="span-two" onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+
+  </div>
+
+  <div class="hint">
+    Keyboard: 0–9 | + | − | × | ÷ | % | Enter (=) | Backspace (DEL) | Esc (Clear)
+  </div>
+
+</div>
+
+<script>
+const display = document.getElementById("display");
+const result = document.getElementById("result");
+
+let expression = "";
+
+// Update the display
+function updateDisplay() {
+    display.textContent = expression || "0";
+}
+
+// Add numbers/operators
+function appendValue(value) {
+    expression += value;
+    updateDisplay();
+}
+
+// Clear everything
+function clearDisplay() {
+    expression = "";
+    result.textContent = "";
+    updateDisplay();
+}
+
+// Delete the last character
+function deleteLast() {
+    expression = expression.slice(0, -1);
+    updateDisplay();
+}
+
+// Calculate the result
+function calculate() {
+    try {
+        const answer = eval(expression);
+        result.textContent = expression + " =";
+        expression = answer.toString();
+        updateDisplay();
+    } catch {
+        display.textContent = "Error";
+        expression = "";
+    }
+}
+
+// Keyboard support
+document.addEventListener("keydown", function(event) {
+
+    const key = event.key;
+
+    // Numbers and operators
+    if (!isNaN(key) || "+-*/.%".includes(key)) {
+        appendValue(key);
+    }
+
+    // Calculate
+    if (key === "Enter") {
+        event.preventDefault();
+        calculate();
+    }
+
+    // Delete last character
+    if (key === "Backspace") {
+        event.preventDefault();
+        deleteLast();
+    }
+
+    // Clear display
+    if (key === "Escape") {
+        clearDisplay();
+    }
+});
+
+// Initialize display
+updateDisplay();
+</script>
+
+</body>
+</html>
