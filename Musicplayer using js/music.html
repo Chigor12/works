@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="music.css">
+  <title>Music Player</title>
+  
+</head>
+<body>
+  <div class="player">
+    <div class="now-playing">
+      <div class="cover" id="cover">♪</div>
+      <div class="song-details">
+        <h2 id="title">Loading...</h2>
+        <p id="artist">Please wait</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn">⏮</button>
+      <button id="playBtn" class="play-btn">▶</button>
+      <button id="nextBtn">⏭</button>
+    </div>
+
+    <div class="progress-row">
+      <span id="currentTime">0:00</span>
+      <input id="progress" type="range" min="0" max="100" value="0" step="0.1" />
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="footer-row">
+      <div class="volume-row">
+        <span>🔊</span>
+        <input id="volume" type="range" min="0" max="1" step="0.1" value="0.7" />
+      </div>
+      <label class="autoplay">
+        <input id="autoplayToggle" type="checkbox" checked />
+        <span>Autoplay</span>
+      </label>
+    </div>
+
+    <div class="playlist">
+      <h3>Playlist</h3>
+      <ul id="playlist"></ul>
+    </div>
+  </div>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  
+  <script src="music.js"></script>
+</body>
+</html>
